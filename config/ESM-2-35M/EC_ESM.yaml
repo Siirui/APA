@@ -1,0 +1,50 @@
+output_dir: ~/scratch/torchprotein_output/
+
+dataset:
+  class: EnzymeCommission
+  path: ~/scratch/protein-datasets/
+  test_cutoff: 0.95
+  atom_feature: null
+  bond_feature: null
+  transform:
+    class: Compose
+    transforms:
+      - class: ProteinView
+        view: residue
+      - class: TruncateProtein
+        max_length: 550
+
+task:
+  class: MultipleBinaryClassification
+  model:
+    class: ESM
+    path: ~/scratch/protein-model-weights/esm-model-weights/
+    model: ESM-2-35M
+  criterion: bce
+  metric: ['auprc@micro', 'f1_max']
+  num_mlp_layer: 3
+  batchnorm: True
+  aug: APA
+  ig: True
+  
+eval_metric: auprc@micro
+
+optimizer:
+  class: Adam
+  lr: 1.0e-4
+
+engine:
+  gpus: [0, 1, 2, 3]
+  batch_size: 4
+
+lr_ratio: 0.1
+
+train:
+  num_epoch: 25
+
+protein_auto_augment:
+  search: True
+  finetune_num: 25
+  finetune_epoch: 5
+  num_subpolicy: 4
+  num_op: 2

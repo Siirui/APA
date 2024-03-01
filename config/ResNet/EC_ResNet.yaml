@@ -1,0 +1,46 @@
+output_dir: ~/scratch/torchprotein_output/
+
+dataset:
+  class: EnzymeCommission
+  path: ~/scratch/protein-datasets/
+  test_cutoff: 0.95
+  atom_feature: null
+  bond_feature: null
+  transform:
+    class: ProteinView
+    view: residue
+
+task:
+  class: MultipleBinaryClassification
+  model:
+    class: ProteinResNet
+    input_dim: 21
+    hidden_dims: [ 512, 512, 512, 512, 512, 512, 512, 512 ]
+    layer_norm: True
+    dropout: 0.1
+  criterion: bce
+  metric: ['auprc@micro', 'f1_max']
+  num_mlp_layer: 2
+  batchnorm: True
+  aug: APA
+  ig: True
+
+eval_metric: auprc@micro
+
+optimizer:
+  class: Adam
+  lr: 2.0e-4
+
+engine:
+  gpus: [0, 1, 2, 3]
+  batch_size: 8
+
+train:
+  num_epoch: 190
+
+protein_auto_augment:
+  search: True
+  finetune_num: 25
+  finetune_epoch: 10
+  num_subpolicy: 4
+  num_op: 2
