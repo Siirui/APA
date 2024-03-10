@@ -1,6 +1,6 @@
 # Enhancing Protein Predictive Models via Proteins Data Augmentation: A Benchmark and New Directions
 
-This is the official codebase of the paper [Enhancing Protein Predictive Models via Proteins Data Augmentation: A Benchmark and New Directions]().
+This is the official codebase of the paper [Enhancing Protein Predictive Models via Proteins Data Augmentation: A Benchmark and New Directions](https://arxiv.org/abs/2403.00875).
 
 ## Overview ##
 
@@ -121,3 +121,18 @@ protein_auto_augment:
   num_subpolicy: 4
   num_op: 2
 ```
+
+## Citation ##
+If you are interested in our repository and our paper, please cite the following paper:
+```
+@article{sun2024enhancing,
+  title={Enhancing Protein Predictive Models via Proteins Data Augmentation: A Benchmark and New Directions},
+  author={Sun, Rui and Wu, Lirong and Lin, Haitao and Huang, Yufei and Li, Stan Z},
+  journal={arXiv preprint arXiv:2403.00875},
+  year={2024}
+}
+```
+
+## Feedback ##
+If you have any issue about this work, please feel free to contact me by email:
+- Rui Sun: jui.sun@outlook.com
